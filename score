@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Scoreboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .player {
+            margin: 10px 0;
+        }
+        .score {
+            font-size: 24px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Basketball Scoreboard</h1>
+        <div id="players"></div>
+        <button onclick="addPlayer()">Add Player</button>
+        <br><br>
+        <button onclick="startGame()">Start Game</button>
+        <div id="scoreboard" style="display: none;">
+            <div class="player" id="player1">
+                <span class="name"></span>
+                <button onclick="increaseScore('score1')">+</button>
+                <span class="score" id="score1">0</span>
+                <button onclick="decreaseScore('score1')">-</button>
+            </div>
+            <div class="player" id="player2">
+                <span class="name"></span>
+                <button onclick="increaseScore('score2')">+</button>
+                <span class="score" id="score2">0</span>
+                <button onclick="decreaseScore('score2')">-</button>
+            </div>
+            <div class="player" id="player3">
+                <span class="name"></span>
+                <button onclick="increaseScore('score3')">+</button>
+                <span class="score" id="score3">0</button>
+                <button onclick="decreaseScore('score3')">-</button>
+            </div>
+            <div class="player" id="player4">
+                <span class="name"></span>
+                <button onclick="increaseScore('score4')">+</button>
+                <span class="score" id="score4">0</span>
+                <button onclick="decreaseScore('score4')">-</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let playerCount = 0;
+
+        function addPlayer() {
+            if (playerCount < 4) {
+                playerCount++;
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player';
+                playerDiv.innerHTML = `<input type="text" id="name${playerCount}" placeholder="Enter Player ${playerCount} Name">`;
+                document.getElementById('players').appendChild(playerDiv);
+            }
+        }
+
+        function startGame() {
+            for (let i = 1; i <= playerCount; i++) {
+                const playerName = document.getElementById(`name${i}`).value;
+                document.getElementById(`player${i}`).style.display = 'block';
+                document.getElementById(`player${i}`).querySelector('.name').textContent = playerName;
+            }
+            document.getElementById('scoreboard').style.display = 'block';
+        }
+
+        function increaseScore(scoreId) {
+            const scoreElement = document.getElementById(scoreId);
+            scoreElement.textContent = parseInt(scoreElement.textContent) + 1;
+        }
+
+        function decreaseScore(scoreId) {
+            const scoreElement = document.getElementById(scoreId);
+            if (parseInt(scoreElement.textContent) > 0) {
+                scoreElement.textContent = parseInt(scoreElement.textContent) - 1;
+            }
+        }
+    </script>
+</body>
+</html>
